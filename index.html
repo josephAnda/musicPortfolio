@@ -3,6 +3,7 @@
 	[  ]  Create the views (without UI bindings)
 	[  ]  Animate the menu icon 
 	[  ]  Create business logic for menu animations and transitions (with javascript)
+		[  ]  Investigate making individual menu items move down (see the old post from Jon) rather than moving the whole 	menu as a unit.
 	[  ]  Make the business logic work in extensible fashion (through Angular)
 	
 -->
@@ -12,31 +13,37 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Joseph Anda's Music Portfolio Page</title>
 		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/style.css">
 	</head>
 	<body>
-		<div class="col-md-2" id="menu">
-			<div id="menu-icon"></div>
-			<nav>
-				<ul class="navbar" id="navlist2">
-					<li>
-						<a>ABOUT</a>
-					</li>
-					<li>
-						<a>TRACKS</a>
-					</li>
-					<li>
-						<a>MIXES</a>
-					</li>
-					<li>
-						<a>HIRE/CONTACT ME</a>
-					</li>
-				</ul>
-			</nav>
+		<div class="row">
+			<div class="col-md-2" id="menu">
+				<div id="menu-icon"></div>
+				<nav>
+					<ul class="navbar" id="navlist">
+						<li>
+							<a>ABOUT</a>
+						</li>
+						<li>
+							<a>TRACKS</a>
+						</li>
+						<li>
+							<a>MIXES</a>
+						</li>
+						<li>
+							<a>HIRE/CONTACT ME</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+			<!--  Can we use the col-md-offset class to replace the following empty div? -->
+			<div class="col-md-8 col-md-offset-2 view-item" id="about">Placeholder for the 'about' section</div>
+			<div class="col-md-8 col-md-offset-2 view-item" id="tracks">Placeholder for the 'tracks' section</div>
+			<div class="col-md-8 col-md-offset-2 view-item" id="mixes">Placeholder for the 'mixes' section</div>
+			<div class="col-md-8 col-md-offset-2 view-item" id="hire-contact-me">Placeholder for the 'hire-me' section</div>
 		</div>
-		<div class="col-md-9" id="about">Placeholder for the 'about' section</div>
-		<div class="col-md-9" id="tracks">Placeholder for the 'tracks' section</div>
-		<div class="col-md-9" id="mixes">Placeholder for the 'mixes' section</div>
-		<div class="col-md-9" id="hire-contact-me">PLaceholder for the 'hire-me' section</div>
+		<script src="js/jquery-1.3.2.min.js"></script>
 		<script src="js/script.js"></script>
+		
 	</body>
 </html>

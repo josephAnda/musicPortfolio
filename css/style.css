@@ -1,0 +1,11 @@
+#menu-icon {
+	height: 5em;
+	width: 5em;
+	background-color: #000;
+}
+
+.navbar > li {
+	visibility: hidden;
+	background-color: blue;
+	color: #fff;
+}
