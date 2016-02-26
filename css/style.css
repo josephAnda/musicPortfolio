@@ -1,11 +1,85 @@
 #menu-icon {
-	height: 5em;
-	width: 5em;
-	background-color: #000;
-}
+  height: 5em;
+  width: 5em;
+  background-color: #fff; }
 
 .navbar > li {
-	visibility: hidden;
-	background-color: blue;
-	color: #fff;
-}
+  visibility: hidden;
+  background-color: blue;
+  color: #fff; }
+
+.x {
+  position: absolute;
+  /*float: left */ }
+
+/*Use this example as a source of properties to read up on */
+.lines-button {
+  display: inline-block;
+  padding: 1.75rem 0.875rem;
+  transition: 0.3s;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 0.5rem; }
+  .lines-button:hover {
+    opacity: 1; }
+  .lines-button:active {
+    transition: 0;
+    background: rgba(0, 0, 0, 0.1); }
+
+.lines {
+  display: inline-block;
+  width: 3.5rem;
+  height: 0.5rem;
+  background: black;
+  border-radius: 0.25rem;
+  transition: 0.3s;
+  position: relative;
+  /*create the upper and lower lines as pseudo-elements of the middle line */ }
+  .lines:before, .lines:after {
+    display: inline-block;
+    width: 3.5rem;
+    height: 0.5rem;
+    background: black;
+    border-radius: 0.25rem;
+    transition: 0.3s;
+    position: absolute;
+    left: 0;
+    content: "";
+    transform-origin: 0.25rem center; }
+  .lines:before {
+    top: 0.875rem; }
+  .lines:after {
+    top: -0.875rem; }
+
+.lines-button:hover {
+  opacity: 1; }
+  .lines-button:hover .lines:before {
+    top: 1rem; }
+  .lines-button:hover .lines:after {
+    top: -1rem; }
+
+.lines-button.arrow.close {
+  transform: scale3d(0.8, 0.8, 0.8); }
+
+.lines-button.arrow.close .lines:before, .lines-button.arrow.close .lines:after {
+  top: 0;
+  width: 1.94444rem; }
+.lines-button.arrow.close .lines:before {
+  transform: rotate3d(0, 0, 1, 40deg); }
+.lines-button.arrow.close .lines:after {
+  transform: rotate3d(0, 0, 1, -40deg); }
+
+.lines-button.x.close .lines {
+  /*hide the middle line */
+  background: transparent;
+  /*overlay the lines by setting both their top values to 0 */ }
+  .lines-button.x.close .lines:before, .lines-button.x.close .lines:after {
+    transform-origin: 50% 50%;
+    top: 0;
+    width: 3.5rem; }
+  .lines-button.x.close .lines:before {
+    transform: rotate3d(0, 0, 1, 45deg); }
+  .lines-button.x.close .lines:after {
+    transform: rotate3d(0, 0, 1, -45deg); }
+
+/*# sourceMappingURL=style.css.map */
