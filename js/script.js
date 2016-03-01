@@ -1,6 +1,6 @@
 //  [!!]  Determine how to control animation . . . . does the position simply reset after an element is hidden?
 //  [!!]  Use the indexOf on the class string name to compare the classes of list and view-items in your UI bindings
-//  [  ]  Clean up the code 
+//  [!!]  Clean up the code 
 //  [  ]  Implement Jasmine
 //  [  ]  Implement Angular 
 
@@ -29,12 +29,6 @@
 			this.hide(this.tracksView);
 			this.hide(this.mixesView);
 			this.hide(this.hireView);
-			
-			
-
-			
-			
-
 		},
 		animate: function(element) {
 			var slideDistance = 2;  //  control how far the menu item slides 
@@ -88,6 +82,7 @@
 		}
 	};
 
+	//  Implements the view and retrieves data from the model
 	var controller = {
 		//  initialize items and necessary UI data bindings related to the view
 		init: function() {
@@ -102,6 +97,7 @@
 				view.bindToToggle(item);
 			});
 		},
+
 		//  Originally intended to fix a bug that auto-selects all elements
 		deselectItemsIn: function(array) {
 			$.each(array, function( index, item) {
@@ -110,6 +106,5 @@
 		}
 	}
 
-	
 	controller.init();    	
 })();
