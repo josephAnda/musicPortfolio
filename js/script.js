@@ -30,11 +30,7 @@
 			this.hide(this.mixesView);
 			this.hide(this.hireView);
 			
-			//  Wires up the menu items to the toggling functionality defined below
-			$.each(this.links, function(index, item) {
-				console.log(item.className);
-				self.bindToToggle(item);
-			});
+			
 
 			
 			
@@ -71,11 +67,14 @@
 		show: function(element) {
 			element.style.visibility = 'visible';
 		},
-		
-		//  allows one view to be open at a time
+		//  The function below encapsulates necessary boolean logic to make the logic more readable (test first)
+		matchesIndex: function(array, element) {
+			return array.className.indexOf(element.id) != -1;
+		},
+		//  ensures only one page view is open at a time
 		toggleViews: function(array, element) {
 			$.each(array, function( index, viewItem ) {
-  				if (viewItem.className.indexOf(element.id) == -1) {
+  				if (!view.matchesIndex(viewItem, element)) {
   					view.hide(viewItem);
   				} else {
   					view.show(viewItem);
@@ -90,13 +89,20 @@
 	};
 
 	var controller = {
+		//  initialize items and necessary UI data bindings related to the view
 		init: function() {
 			view.init();
 			view.xButton.addEventListener('click', function() {
 				view.animate(view.menuItems);
 			});
-		},
 
+			//  Wires up the menu items to the toggling functionality defined in the view
+			$.each(view.links, function(index, item) {
+				console.log(item.className);
+				view.bindToToggle(item);
+			});
+		},
+		//  Originally intended to fix a bug that auto-selects all elements
 		deselectItemsIn: function(array) {
 			$.each(array, function( index, item) {
 				item.selected = false;
