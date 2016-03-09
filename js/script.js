@@ -9,10 +9,13 @@
 //        document with values from the js file, which in turn means that I should package my raw data either in script.js
 //        or (more likely) in a JSON file that is loaded by the model object.  (probably via JSON.Stringify() or something
 //        similar.  
+//		[!!]  Write a function that creates, populates, and inserts a div.
+//   	[  ]  Use that function to wire the menu item clicks to altering the html content (to reflect the current view)
 //  [  ]  Implement Jasmine
+//  	[  ]  Learn how to apply fixtures to implement Jasmine on scripts with DOM dependencies 
 //  [  ]  Implement Angular 
 //  [  ]  Add some sort of blue, animated background  
-//  [  ]  Draw up the contents of every view
+//  [!!]  Draw up the contents of every view
 //  [  ]  Ensure each view item occupies the same position when switched on
 //  [  ]  Use bootstrap to 'box out' all of the major menu items 
 //  [  ]  Read up on error handling in Javascript
@@ -116,7 +119,7 @@
 				console.log(item.className);
 				view.bindToToggle(item);
 			});
-			view.createDiv('This is some content', 'test_class', 'test_id');   
+			view.createDiv('This is some content.  We will later update the view by editing the HTML of this div, rather than altering the visibility properties of our views', 'test_class', 'test_id');   
 			
 		},
 		//  Originally intended to fix a bug that auto-selects all elements
