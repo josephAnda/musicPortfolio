@@ -3,14 +3,16 @@
   width: 5em;
   background-color: #fff; }
 
+body {
+  background-image: url("img/background.jpg"); }
+
 .navbar > li {
   visibility: hidden;
   background-color: blue;
   color: #fff; }
 
 .x {
-  position: absolute;
-  /*float: left */ }
+  position: absolute; }
 
 /*Use this example as a source of properties to read up on */
 .lines-button {
@@ -19,7 +21,8 @@
   transition: 0.3s;
   cursor: pointer;
   user-select: none;
-  border-radius: 0.5rem; }
+  border-radius: 0.5rem;
+  background-color: transparent; }
   .lines-button:hover {
     opacity: 1; }
   .lines-button:active {

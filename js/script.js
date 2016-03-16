@@ -1,61 +1,48 @@
-//  [!!]  Determine how to control animation . . . . does the position simply reset after an element is hidden?
-//  [!!]  Use the indexOf on the class string name to compare the classes of list and view-items in your UI bindings
-//  [!!]  Clean up the code 
-//  [!!]  FIX THIS DESIGN FLAW:  Currently, you are changing views by altering the visibility property of the elements.  
-//  	  One issue with this (perhaps inter alia) is that the positions of the views are still affected by hidden 
-//        elements (preferably we have each view occupying the same position as each other).  To fix, the view needs
-//        to have a way of recognizing the 'current view', meaning a 'current view' variable needs to be updated and 
-//        Given the value of the necessary html content.  This means we should probably dynamically populate the html
-//        document with values from the js file, which in turn means that I should package my raw data either in script.js
-//        or (more likely) in a JSON file that is loaded by the model object.  (probably via JSON.Stringify() or something
-//        similar.  
-//		[!!]  Write a function that creates, populates, and inserts a div.
-//   	[!!]  Use that function to wire the menu item clicks to altering the html content (to reflect the current view)
-//  	[!!]  Add objects to the model that encapsulate the name and text content of each view
-//		[!!]  Implement the function to replace current method of view-switching 
-//  [  ]  Implement Jasmine
-//  	[  ]  Learn how to apply fixtures to implement Jasmine on scripts with DOM dependencies 
-//  [  ]  Implement Angular 
-//  [  ]  Add some sort of blue, animated background  
-//  [!!]  Draw up the contents of every view
-//  [!!]  Ensure each view item occupies the same position when switched on
-//  [  ]  Use bootstrap to 'box out' all of the major menu items 
-//  [  ]  Read up on error handling in Javascript
+/*
+[  ]  Implement Jasmine
+[  ]  Learn how to apply fixtures to implement Jasmine on scripts with DOM dependencies 
+[  ]  Implement Angular 
+[  ]  Add some sort of blue, animated background  
+[  ]  Use bootstrap to 'box out' all of the major menu items 
+[  ]  Read up on error handling in Javascript
+*/
 
 (function() {
 	"use strict";
 
-	//  To hold any JSON or server data
+	//  To hold any JSON or server data.  For this project the contents are the html of the views
 	var model = {
 		menuItems: [
 			{
 				section:  "about",
-				content:  "Joseph is a producer and DJ living in the San Francisco Bay Area. His style is influenced by a variety of musical elements and genres including rock, classical, house, trance, ambient, and hip-hop. When he's not producing or mixing his favorite tunes you can find him writing and testing software, riding longboards, reading and writing SciFi, playing video games and bodybuilding."
+				content:  "<h1>About Joseph</h1></br><p>My name is Joseph Anda, and I am a producer and DJ living in the San Francisco Bay Area. My style is influenced by a variety of musical elements and genres including rock, classical, house, trance, ambient, and hip-hop. When I'm not producing or mixing you can find me writing and testing software, riding longboards, reading and writing SciFi, playing video games and bodybuilding.</p><h5>Instrumentalist</h5><p>As a guitarist and pianist, I like to incorporate both of those musical elements into my electronic works</p><h5>DJ</h5><p>As a DJ, I enjoy mixing my own and others' tracks together to create a unique audio experience every time.</p><h5>Producer</h5><p>I bring my love of analog intstrumentation and digital mxixing together in my original productions</p>"
 			},
 			{
 				section:  "tracks",
-				content:  "Placeholder for the 'tracks' section"
+				content:  "<h1>Tracks</h1><p>Scroll through the available tracks or submit a comment</p><div id='music_player'><h5>Track 01 - Upward Spiral</h5><audio controls><source src='horse.ogg' type='audio/ogg'><source src='horse.mp3' type='audio/mpeg'>Your browser does not support the audio element.</audio><h5>Track 02 - Tomorrow</h5><audio controls><source src='horse.ogg' type='audio/ogg'><source src='horse.mp3' type='audio/mpeg'>Your browser does not support the audio element.</audio></div>"
 			},
 			{
 				section:  "mixes",
-				content:  "Placeholder for the 'mixes' section"
+				content:  "<h1>Mixes</h1><p>Scroll through the available mixes or submit a comment</p><div id='music_player'><h5>Mix 01 - Sky Mix</h5><audio controls><source src='horse.ogg' type='audio/ogg'><source src='horse.mp3' type='audio/mpeg'>Your browser does not support the audio element.</audio></div>"
 			},
 			{
 				section:  "contact",
-				content:  "I would love to hear from you! Contact me at:"
+				content:  "<h1>Contact Me</h1><p>I would love to hear from you! You can e-mail me at:  orenmurasaki@gmail.com</p>"
 			}
 		]
 	};
 
-	//  Holds variables and logic pertaining to the view   
+	//  Holds variables and logic pertaining to the view, including the main functions for data-bindings   
 	var view = {
 		init: function() {
 			var self = this;
-			this.menuIcon = document.getElementById('menu-icon');
-			this.menuItems = document.querySelectorAll(".navbar > li");
-			this.links = document.querySelectorAll(".navbar > li > a");
-			this.opened = false;  //  Boolean to track the toggle state of the menu
-			this.xButton = document.getElementsByClassName("x")[0]; 
+			self.menuIcon = document.getElementById('menu-icon');
+			self.menuItems = document.querySelectorAll(".navbar > li");
+			self.links = document.querySelectorAll(".navbar > li > a");
+			self.opened = false;  //  Boolean to track the toggle state of the menu
+			self.slid = false;
+			self.xButton = document.getElementsByClassName("x")[0];
+			self.currentSection = model.menuItems[0].section; 
 		},
 
 		animate: function(element) {
@@ -83,7 +70,19 @@
 			}
 		},
 
-		hide: function(element) {
+		//Animation functionality for the view div
+		slide: function(element, displacement) {
+			var slideDistance = displacement;  //  controls how far the view item slides
+			element.style.transition = 'all 0.2s ease';
+			element.style.transform = 'translate(' + slideDistance + 'px)';
+		},
+
+		reset: function(element) {
+			element.style.transition = '';
+			element.style.transform = '';
+		},
+
+		hide: function(element) {	
 			element.style.visibility = 'hidden';
 		},
 
@@ -99,9 +98,18 @@
 		//  ensures only one page view is open at a time
 		toggleViews: function(array, element) {
 			$.each(array, function( index, menuItem ) {
-				if ( view.matchesIndex(menuItem, element) )  {	
-					$( '#view_id' ).html( menuItem.content );
-				} 
+
+				//  Find and change current view only if a different one is selected via the navbar
+				if ( view.matchesIndex(menuItem, element) && view.currentSection != menuItem.section )  {	
+					view.currentSection = menuItem.section;
+					$( '#view_id' ).fadeTo(190, 0);
+
+					//  Times it so the content is changed once the element has faded
+					setTimeout( function() {
+						$( '#view_id' ).html( menuItem.content );	
+						$( '#view_id' ).fadeTo(190, 1);
+					}, 200);
+				} 		
 			});
 		},
 
@@ -121,7 +129,7 @@
 		}
 	};
 
-	//  Implements the view and retrieves data from the model
+	//  Implements the view's functions and retrieves data from the model
 	var controller = {
 
 		//  initialize items and necessary UI data bindings related to the view
@@ -132,7 +140,6 @@
 			});
 			//  Wires up the menu items to the toggling functionality defined in the view
 			$.each(view.links, function(index, item) {
-				console.log(item.className);
 				view.bindToToggle(item);
 			});
 			view.createDiv(model.menuItems[0].content, 'view_class', 'view_id');   
