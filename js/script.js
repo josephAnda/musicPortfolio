@@ -19,7 +19,7 @@
 			},
 			{
 				section:  "tracks",
-				content:  "<h1>Tracks</h1><p>Scroll through the available tracks or submit a comment</p><div id='music_player'><h5>Track 01 - Upward Spiral</h5><audio controls><source src='horse.ogg' type='audio/ogg'><source src='horse.mp3' type='audio/mpeg'>Your browser does not support the audio element.</audio><h5>Track 02 - Tomorrow</h5><audio controls><source src='horse.ogg' type='audio/ogg'><source src='horse.mp3' type='audio/mpeg'>Your browser does not support the audio element.</audio></div>"
+				content:  "<h1>Tracks</h1><p>Scroll through the available tracks or submit a comment.  Direct download is currently not supported, though you can find the tracks for free via SoundCloud.</p><div id='music_player'><h5>Track 01 - Upward Spiral</h5><audio controls><source src='horse.ogg' type='audio/ogg'><source src='horse.mp3' type='audio/mpeg'>Your browser does not support the audio element.</audio><h5>Track 02 - Tomorrow</h5><audio controls><source src='horse.ogg' type='audio/ogg'><source src='horse.mp3' type='audio/mpeg'>Your browser does not support the audio element.</audio></div>"
 			},
 			{
 				section:  "mixes",
@@ -55,7 +55,7 @@
 					element[i].style.transform = 'translatey(' + slideDistance + 'em)';
 					slideDistance += 2;
 				}
-				this.xButton.className += " close";  //  animate the menu icon
+				this.xButton.className += " close";  //  animate the menu icon via adding 'close' styles
 				this.opened = true;
 			} else {
 				//  Move the menu items back up a relative amount 
@@ -65,7 +65,7 @@
 					element[i].style.transform = 'translatey(-' + 1 + 'em)';
 					slideDistance -= 2;
 				}
-				this.xButton.className = this.xButton.className.replace(" close", "");  //  animate the menu icon 
+				this.xButton.className = this.xButton.className.replace(" close", "");  //  undo adding 'close' class
 				this.opened = false;
 			}
 		},
@@ -119,7 +119,7 @@
 			});
 		},
 
-		//  View method to dynamically create <divs> and insert content
+		//  View method to dynamically create <div>s and insert content to webpage
 		createDiv: function(content, div_class, div_id) {
 			var newDiv = document.createElement( "div" );
 			$(newDiv).attr('id', div_id);
@@ -135,6 +135,7 @@
 		//  initialize items and necessary UI data bindings related to the view
 		init: function() {
 			view.init();
+			//  Wires up the menu button
 			view.xButton.addEventListener('click', function() {
 				view.animate(view.menuItems);
 			});
@@ -142,11 +143,12 @@
 			$.each(view.links, function(index, item) {
 				view.bindToToggle(item);
 			});
+			//  Populates the view with the first page 
 			view.createDiv(model.menuItems[0].content, 'view_class', 'view_id');   
 			
 		},
 
-		//  Originally intended to fix a bug that auto-selects all elements
+		//  Originally intended to fix a bug that auto-selects all elements, not currently implemented
 		deselectItemsIn: function(array) {
 			$.each(array, function( index, item) {
 				item.selected = false;
