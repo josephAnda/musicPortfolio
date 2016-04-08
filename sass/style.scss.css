@@ -8,13 +8,19 @@ body
 
 .navbar > li 
   visibility: hidden
-  background-color: blue
-  color: #fff
+  
+a
+  background-color: #00ccff
+  color: #000
+
+  &:visited
+    color: #000
 
 .x
   position: absolute
   
 
+  
 /*Use this example as a source of properties to read up on*/
 $button-size : 3.5rem
 $transition: .3s // increase this to see the transformations in slow-motion

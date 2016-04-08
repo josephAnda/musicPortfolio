@@ -7,9 +7,13 @@ body {
   background-image: url("img/background.jpg"); }
 
 .navbar > li {
-  visibility: hidden;
-  background-color: blue;
-  color: #fff; }
+  visibility: hidden; }
+
+a {
+  background-color: #00ccff;
+  color: #000; }
+  a:visited {
+    color: #000; }
 
 .x {
   position: absolute; }
