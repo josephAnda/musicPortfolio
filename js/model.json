@@ -1,0 +1,18 @@
+"menuItems": [
+			{
+				"section":  "about",
+				"content":  "<h1>About Joseph</h1></br><p>My name is Joseph Anda, and I am a producer and DJ living in the San Francisco Bay Area. My style is influenced by a variety of musical elements and genres including rock, classical, house, trance, ambient, and hip-hop. When I'm not producing or mixing you can find me writing and testing software, riding longboards, reading and writing SciFi, playing video games and bodybuilding.</p><h5>Instrumentalist</h5><p>As a guitarist and pianist, I like to incorporate both of those musical elements into my electronic works</p><h5>DJ</h5><p>As a DJ, I enjoy mixing my own and others' tracks together to create a unique audio experience every time.</p><h5>Producer</h5><p>I bring my love of analog intstrumentation and digital mxixing together in my original productions</p>"
+			},
+			{
+				"section":  "tracks",
+				"content":  "<h1>Tracks</h1><p>Scroll through the available tracks or submit a comment.  Direct download is currently not supported, though you can find the tracks for free via SoundCloud.</p><div id='music_player'><h5>Track 01 - Upward Spiral</h5><audio controls><source src='horse.ogg' type='audio/ogg'><source src='horse.mp3' type='audio/mpeg'>Your browser does not support the audio element.</audio><h5>Track 02 - Tomorrow</h5><audio controls><source src='horse.ogg' type='audio/ogg'><source src='horse.mp3' type='audio/mpeg'>Your browser does not support the audio element.</audio></div>"
+			},
+			{
+				"section":  "mixes",
+				"content":  "<h1>Mixes</h1><p>Scroll through the available mixes or submit a comment</p><div id='music_player'><h5>Mix 01 - Sky Mix</h5><audio controls><source src='horse.ogg' type='audio/ogg'><source src='horse.mp3' type='audio/mpeg'>Your browser does not support the audio element.</audio></div>"
+			},
+			{
+				"section":  "contact",
+				"content":  "<h1>Contact Me</h1><p>I would love to hear from you! You can e-mail me at:  orenmurasaki@gmail.com</p>"
+			}
+		]
